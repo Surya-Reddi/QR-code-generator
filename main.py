@@ -13,4 +13,15 @@ qr.make(fit = True)
 
 img = qr.make_image(fill_color = "red",back_color = "white").convert('RGB')
 
+logo = Image.open('mylogo.png') #adding my logo onto qr
+
+# Calculate logo size and position
+qr_width, qr_height = img.size
+logo_size = int(qr_width / 4)
+logo = logo.resize((logo_size, logo_size))
+logo_position = ((qr_width - logo_size) // 2, (qr_height - logo_size) // 2)
+
+# Paste logo onto QR Code
+img.paste(logo, logo_position, logo)
+
 img.save("test.png")
